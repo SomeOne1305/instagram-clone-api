@@ -1,0 +1,36 @@
+{
+	"data": {
+		"users": [
+			{
+				"id": "unique user id",
+				"email": "",
+				"fullName": "",
+				"username": "",
+				"password": "",
+				"profileImg": "",
+				"followers": [],
+				"followings": [],
+				"posts": []
+			}
+		],
+		"post": [
+			{
+				"_id": "",
+				"postUrl": "",
+				"post_caption": "",
+				"likes": [],
+				"comments": [
+					{
+						"id": "comment_id",
+						"user": {
+							"username": "",
+							"fullName": "",
+							"profileImg": ""
+						},
+						"text": ""
+					}
+				]
+			}
+		]
+	}
+}
