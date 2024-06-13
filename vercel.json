@@ -14,12 +14,9 @@
     }
   ],
   "build": {
-    "env": {
-      "NODE_ENV": "production"
-    },
-    "scripts": {
-      "install": "npm install --force",
-      "build": "npm run build"
-    }
+    "buildCommand": "npm run build",
+    "devCommand": "npm run start:dev",
+    "startCommand": "npm run start:prod",
+    "intallCommand": "npm install --force"
   }
 }
