@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
+  "devCommand": "npm run start:dev",
+  "installCommand": "npm install --force",
   "builds": [
     {
       "src": "src/main.ts",
@@ -14,7 +17,5 @@
       "src": "/(.*)",
       "dest": "/src/main.ts"
     }
-  ],
-  "buildCommand": "npm run build",
-  "devCommand": "npm run start:dev"
+  ]
 }
