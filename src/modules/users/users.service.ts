@@ -6,7 +6,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ImageKitClient } from '@platohq/nestjs-imagekit';
 import * as bcrypt from 'bcryptjs';
 import { Response } from 'express';
 import { Repository } from 'typeorm';
@@ -19,12 +18,13 @@ import {
 
 // Entities
 import { User } from 'src/entities/user.entity';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly usersRepository: Repository<User>,
-    private readonly imageKit: ImageKitClient,
+    private readonly storage: StorageService,
   ) {}
   async getAllUsers(): Promise<User[]> {
     return await this.usersRepository.find();
@@ -68,9 +68,9 @@ export class UsersService {
       throw new NotFoundException(`User with id ${userId} is not found`);
     }
     if (user.profileImg.type === 'edited') {
-      await this.imageKit.deleteFile(user.profileImg.fileId);
+      await this.storage.deleteFile(user.profileImg.fileId);
     }
-    const res = await this.imageKit.upload({
+    const res = await this.storage.upload({
       file: file.buffer,
       fileName: file.originalname,
       folder: 'users',
@@ -94,12 +94,12 @@ export class UsersService {
         'Your request contains invalid fileId parameter.',
       );
     }
-    await this.imageKit.deleteFile(fileId).catch((err) => {
+    await this.storage.deleteFile(fileId).catch((err) => {
       console.log(err);
     });
     user.profileImg = {
       fileId: '6645de4388c257da336f10ec',
-      url: 'https://ik.imagekit.io/lhvoxkb7i/users/default-user_kHqfmeEDX',
+      url: 'https://ik.storage.io/lhvoxkb7i/users/default-user_kHqfmeEDX',
       type: 'default',
     };
     return await this.usersRepository.save(user);
@@ -153,11 +153,11 @@ export class UsersService {
       });
       if (user.posts?.length > 0) {
         user.posts.map(async (item) => {
-          await this.imageKit.deleteFile(item.post_data.fileId);
+          await this.storage.deleteFile(item.post_data.fileId);
         });
       }
       if (user.profileImg.type === 'edited') {
-        await this.imageKit.deleteFile(user.profileImg.fileId);
+        await this.storage.deleteFile(user.profileImg.fileId);
       }
       return await this.usersRepository.remove(user);
     } catch (error) {

@@ -7,18 +7,18 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ImageKitClient } from '@platohq/nestjs-imagekit';
 import { CreatePostDto } from 'src/dtoes/post.dto';
 import { Post } from 'src/entities/post.entity';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable()
 export class PostsService {
   constructor(
     @InjectRepository(Post) private readonly postRepository: Repository<Post>,
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-    private readonly imageKit: ImageKitClient,
+    private readonly storage: StorageService,
   ) {}
   async getAllPosts(
     page: number,
@@ -67,7 +67,7 @@ export class PostsService {
       throw new NotFoundException('User is not found');
     }
 
-    const res = await this.imageKit.upload({
+    const res = await this.storage.upload({
       fileName: 'post_' + Math.random().toString(16).slice(2),
       file: dto.post_data.buffer,
       folder: 'posts',
@@ -85,7 +85,7 @@ export class PostsService {
       });
       return post;
     } catch (error) {
-      await this.imageKit.deleteFile(res.fileId);
+      await this.storage.deleteFile(res.fileId);
       throw new InternalServerErrorException(error);
     }
   }
@@ -96,7 +96,7 @@ export class PostsService {
       throw new NotFoundException('Post with this id not found');
     }
     try {
-      await this.imageKit.deleteFile(post.post_data.fileId);
+      await this.storage.deleteFile(post.post_data.fileId);
       await this.postRepository.delete({ id: id });
       return new HttpException('Deleted successfully !', 200);
     } catch (error) {

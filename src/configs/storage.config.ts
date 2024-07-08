@@ -1,5 +1,5 @@
 import { registerAs } from '@nestjs/config';
-import { ImageKitModuleOptions } from '@platohq/nestjs-imagekit';
+import { ImageKitModuleOptions } from 'src/types';
 
 export default registerAs(
   'storageConfig',

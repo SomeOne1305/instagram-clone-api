@@ -11,3 +11,9 @@ export interface IReq extends Request {
     id: string;
   };
 }
+
+export interface ImageKitModuleOptions {
+  privateKey: string;
+  publicKey: string;
+  urlEndpoint: string;
+}

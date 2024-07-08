@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Install dependencies
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --force
 
 # Copy the rest of the application code
 COPY . .
@@ -17,6 +17,8 @@ RUN npm run build
 FROM node:18-alpine
 
 WORKDIR /app
+
+COPY .env /app/
 
 # Copy built application from the builder stage
 COPY --from=builder /app/dist ./dist
