@@ -5,7 +5,6 @@ import express from 'express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/exceptions/http-exception.filter';
-import appConfig from './configs/app.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,7 +12,11 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   // CORS
   app.enableCors({
-    origin: appConfig(),
+    origin: [
+      'https://insta-clone-application.vercel.app/',
+      'https://insta-clone-application.vercel.app',
+      'http://localhost:5173/',
+    ],
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
     credentials: true,
   });
