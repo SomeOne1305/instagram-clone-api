@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import ImageKit from 'imagekit';
 import { UploadOptions, UploadResponse } from 'imagekit/dist/libs/interfaces';
 import IKResponse from 'imagekit/dist/libs/interfaces/IKResponse';
-import storageConfig from 'src/configs/storage.config';
+import storageConfig from '../../configs/storage.config';
 
 @Injectable()
 export class StorageService {

@@ -7,10 +7,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreatePostDto } from 'src/dtoes/post.dto';
-import { Post } from 'src/entities/post.entity';
-import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
+import { CreatePostDto } from '../../dtoes/post.dto';
+import { Post } from '../../entities/post.entity';
+import { User } from '../../entities/user.entity';
 import { StorageService } from '../storage/storage.service';
 
 @Injectable()

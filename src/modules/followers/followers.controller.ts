@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/common/guards/Auth.guard';
-import { IReq } from 'src/types';
+import { AuthGuard } from '../../common/guards/Auth.guard';
+import { IReq } from '../../types';
 import { FollowersService } from './followers.service';
 
 @ApiTags('Followers')

@@ -17,7 +17,7 @@ import {
   SignInUser,
   VerificationDto,
   VerifyResDto,
-} from 'src/dtoes/user.dto';
+} from '../../dtoes/user.dto';
 import { AuthService } from './auth.service';
 
 @ApiTags('Auth')

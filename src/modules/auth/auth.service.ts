@@ -14,11 +14,11 @@ import * as bcrypt from 'bcryptjs';
 import { Cache } from 'cache-manager';
 import * as crypto from 'crypto';
 import { Request, Response } from 'express';
-import { User } from 'src/entities/user.entity';
-import { renderTemplate } from 'src/mailer/template';
-import { IPayload } from 'src/types';
 import { Repository } from 'typeorm';
 import { CreateUserDto, SignInUser, VerifyResDto } from '../../dtoes/user.dto';
+import { User } from '../../entities/user.entity';
+import { renderTemplate } from '../../mailer/template';
+import { IPayload } from '../../types';
 import { ResetPasswordDto } from './../../dtoes/user.dto';
 import { OtpService } from './otp.service';
 

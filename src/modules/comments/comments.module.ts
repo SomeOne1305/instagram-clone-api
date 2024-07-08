@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Comment } from 'src/entities/comment.entity';
-import { Post } from 'src/entities/post.entity';
-import { User } from 'src/entities/user.entity';
+import { Comment } from '../../entities/comment.entity';
+import { Post } from '../../entities/post.entity';
+import { User } from '../../entities/user.entity';
 import { CommentsController } from './comments.controller';
 import { CommentsService } from './comments.service';
 

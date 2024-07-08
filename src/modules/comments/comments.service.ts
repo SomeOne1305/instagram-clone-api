@@ -4,11 +4,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateCommentDto } from 'src/dtoes/comment.dto';
-import { Comment } from 'src/entities/comment.entity';
-import { Post } from 'src/entities/post.entity';
-import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
+import { CreateCommentDto } from '../../dtoes/comment.dto';
+import { Comment } from '../../entities/comment.entity';
+import { Post } from '../../entities/post.entity';
+import { User } from '../../entities/user.entity';
 
 @Injectable()
 export class CommentsService {

@@ -13,9 +13,9 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/common/guards/Auth.guard';
-import { CreateCommentDto } from 'src/dtoes/comment.dto';
-import { IReq } from 'src/types';
+import { AuthGuard } from '../../common/guards/Auth.guard';
+import { CreateCommentDto } from '../../dtoes/comment.dto';
+import { IReq } from '../../types';
 import { CommentsService } from './comments.service';
 
 @ApiTags('Comments')

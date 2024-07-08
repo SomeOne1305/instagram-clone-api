@@ -2,13 +2,13 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/entities/user.entity';
+import { User } from '../../entities/user.entity';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 // configs
 import { CacheModule } from '@nestjs/cache-manager';
 import { RedisClientOptions } from 'redis';
-import redisConfig from 'src/configs/redis.config';
+import redisConfig from '../../configs/redis.config';
 import { OtpService } from './otp.service';
 
 @Module({

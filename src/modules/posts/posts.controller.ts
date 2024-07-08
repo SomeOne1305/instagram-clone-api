@@ -17,10 +17,10 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/common/guards/Auth.guard';
-import { CreatePostDto, GetPosts } from 'src/dtoes/post.dto';
-import { IReq } from 'src/types';
-import { multerOptions } from 'src/utils/filterFiles';
+import { AuthGuard } from '../../common/guards/Auth.guard';
+import { CreatePostDto, GetPosts } from '../../dtoes/post.dto';
+import { IReq } from '../../types';
+import { multerOptions } from '../../utils/filterFiles';
 import { PostsService } from './posts.service';
 @ApiTags('Posts')
 @Controller('posts')

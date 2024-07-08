@@ -2,7 +2,7 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
-import { getRandomSixDigitNumber } from 'src/utils/generateRandomNumber';
+import { getRandomSixDigitNumber } from '../../utils/generateRandomNumber';
 
 @Injectable()
 export class OtpService {

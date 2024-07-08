@@ -9,9 +9,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/common/guards/Auth.guard';
-import { Like } from 'src/entities/like.entity';
-import { IReq } from 'src/types';
+import { AuthGuard } from '../../common/guards/Auth.guard';
+import { Like } from '../../entities/like.entity';
+import { IReq } from '../../types';
 import { LikesService } from './likes.service';
 
 @ApiTags('Likes')
