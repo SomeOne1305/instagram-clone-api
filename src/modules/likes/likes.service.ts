@@ -1,10 +1,10 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AlreadyDone } from 'src/common/exceptions/AlreadyDone';
-import { Like } from 'src/entities/like.entity';
-import { Post } from 'src/entities/post.entity';
-import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
+import { AlreadyDone } from '../../common/exceptions/AlreadyDone';
+import { Like } from '../../entities/like.entity';
+import { Post } from '../../entities/post.entity';
+import { User } from '../../entities/user.entity';
 
 @Injectable()
 export class LikesService {
