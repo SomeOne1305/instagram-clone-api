@@ -12,11 +12,7 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   // CORS
   app.enableCors({
-    origin: [
-      'https://insta-clone-application.vercel.app/',
-      'https://insta-clone-application.vercel.app',
-      'http://localhost:5173/',
-    ],
+    origin: '*',
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
     credentials: true,
   });
