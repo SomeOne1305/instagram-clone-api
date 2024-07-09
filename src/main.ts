@@ -18,6 +18,7 @@ async function bootstrap() {
         callback(new Error('Not allowed by CORS'));
       }
     },
+    credentials: true,
   });
   // CORS
   app.enableCors();
