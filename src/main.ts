@@ -11,11 +11,7 @@ async function bootstrap() {
   app.use(cookieParser());
   app.useGlobalFilters(new HttpExceptionFilter());
   // CORS
-  app.enableCors({
-    origin: process.env.CLIENT_URL,
-    methods: ['GET', 'POST', 'DELETE', 'PUT'],
-    credentials: true,
-  });
+  app.enableCors();
   const config = new DocumentBuilder()
     .setTitle('Instagram clone')
     .setDescription(
@@ -28,18 +24,18 @@ async function bootstrap() {
     '/api',
     express.static(join(__dirname, '../node_modules/swagger-ui-dist')),
   );
-  app.use((req, res, next) => {
-    res.header(
-      'Access-Control-Allow-Origin',
-      'https://insta-clone-application.vercel.app',
-    );
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept',
-    );
-    next();
-  });
+  // app.use((req, res, next) => {
+  //   res.header(
+  //     'Access-Control-Allow-Origin',
+  //     'https://insta-clone-application.vercel.app',
+  //   );
+  //   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  //   res.header(
+  //     'Access-Control-Allow-Headers',
+  //     'Origin, X-Requested-With, Content-Type, Accept',
+  //   );
+  //   next();
+  // });
 
   await app.listen(process.env.PORT || 3000);
 }
