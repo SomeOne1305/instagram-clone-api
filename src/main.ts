@@ -10,6 +10,15 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.enableCors({
+    origin: (origin, callback) => {
+      if (origin === 'https://insta-clone-application.vercel.app/') {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  });
   // CORS
   app.enableCors();
   const config = new DocumentBuilder()
