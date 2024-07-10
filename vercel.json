@@ -19,15 +19,5 @@
       }
     }
   ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "src/main.ts"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/public/$1"
-    }
-  ],
   "buildCommand": "npm run build"
 }
