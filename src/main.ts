@@ -1,10 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
-import express from 'express';
+import express, { NextFunction, Response } from 'express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/exceptions/http-exception.filter';
+import { IReq } from './types';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -25,7 +26,19 @@ async function bootstrap() {
     credentials: true,
   });
   // CORS
-  app.enableCors();
+  app.use((req: IReq, res: Response, next: NextFunction) => {
+    res.header('Access-Control-Allow-Origin', allowedOrigins.join(', '));
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    );
+    res.header('Access-Control-Allow-Credentials', 'true');
+    if (req.method === 'OPTIONS') {
+      return res.sendStatus(200);
+    }
+    next();
+  });
   const config = new DocumentBuilder()
     .setTitle('Instagram clone')
     .setDescription(
@@ -38,18 +51,6 @@ async function bootstrap() {
     '/api',
     express.static(join(__dirname, '../node_modules/swagger-ui-dist')),
   );
-  // app.use((req, res, next) => {
-  //   res.header(
-  //     'Access-Control-Allow-Origin',
-  //     'https://insta-clone-application.vercel.app',
-  //   );
-  //   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  //   res.header(
-  //     'Access-Control-Allow-Headers',
-  //     'Origin, X-Requested-With, Content-Type, Accept',
-  //   );
-  //   next();
-  // });
 
   await app.listen(process.env.PORT || 3000);
 }
