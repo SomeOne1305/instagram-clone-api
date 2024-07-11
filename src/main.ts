@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import helmet from 'helmet';
 import { join } from 'path';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/exceptions/http-exception.filter';
@@ -9,6 +10,7 @@ import { HttpExceptionFilter } from './common/exceptions/http-exception.filter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
+  app.use(helmet());
   app.useGlobalFilters(new HttpExceptionFilter());
   const allowedOrigins = [
     'https://insta-clone-application.vercel.app',
@@ -24,20 +26,6 @@ async function bootstrap() {
     },
     credentials: true,
   });
-  // CORS
-  // app.use((req: IReq, res: Response, next: NextFunction) => {
-  //   res.header('Access-Control-Allow-Origin', allowedOrigins.join(', '));
-  //   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
-  //   res.header(
-  //     'Access-Control-Allow-Headers',
-  //     'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-  //   );
-  //   res.header('Access-Control-Allow-Credentials', 'true');
-  //   if (req.method === 'OPTIONS') {
-  //     return res.sendStatus(200);
-  //   }
-  //   next();
-  // });
   const config = new DocumentBuilder()
     .setTitle('Instagram clone')
     .setDescription(
