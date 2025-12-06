@@ -1,10 +1,10 @@
 import {
   ArgumentsHost,
   Catch,
-  ConflictException,
   ExceptionFilter,
   HttpException,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { QueryFailedError } from 'typeorm';
@@ -19,6 +19,8 @@ interface CustomErrorResponse {
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
+  private readonly logger = new Logger(HttpExceptionFilter.name);
+
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -30,14 +32,28 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     if (exception instanceof HttpException) {
       status = exception.getStatus();
-      message = 'Bad Request';
-      details = exception.getResponse();
+      const errorResponse = exception.getResponse();
+
+      // Extract error message and details
+      if (typeof errorResponse === 'string') {
+        message = errorResponse;
+      } else if (typeof errorResponse === 'object' && errorResponse !== null) {
+        message = (errorResponse as any).message || message;
+        details = (errorResponse as any).details || errorResponse;
+      }
+
+      this.logger.warn(`HttpException: ${message}`, exception.stack);
     } else if (exception instanceof QueryFailedError) {
       status = HttpStatus.BAD_REQUEST;
-      message = 'Duplicate value error: A unique constraint was violated';
+      message = 'Database error occurred';
       details = (exception as any).detail || 'Query failed without details';
-    } else if (exception instanceof ConflictException) {
-      status = HttpStatus.CONFLICT;
+
+      this.logger.error(`QueryFailedError: ${message}`, exception.stack);
+    } else {
+      this.logger.error(
+        `Unhandled exception: ${exception}`,
+        exception instanceof Error ? exception.stack : '',
+      );
     }
 
     const errorResponse: CustomErrorResponse = {

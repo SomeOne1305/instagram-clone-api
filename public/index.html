@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png" />
+    <title>Instagram Clone API</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Fira Code', monospace;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #0d1117;
+        color: #c9d1d9;
+        padding: 2rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        user-select: none;
+        background: linear-gradient(
+          45deg,
+          #f09433,
+          #e6683c,
+          #dc2743,
+          #cc2366,
+          #bc1888
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .bracket {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #58a6ff;
+      }
+
+      .api {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #0d1117;
+        background: #58a6ff;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+      }
+
+      .snippet {
+        background: #161b22;
+        border-radius: 8px;
+        padding: 1rem;
+        width: min(600px, 90%);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        font-size: 0.9rem;
+      }
+
+      .line {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .method {
+        font-weight: bold;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        color: #0d1117;
+      }
+
+      .GET {
+        background: #58a6ff;
+      }
+
+      .POST {
+        background: #f78166;
+      }
+
+      .DELETE {
+        background: #f85149;
+      }
+
+      .endpoint {
+        color: #8b949e;
+      }
+
+      a.docs {
+        margin-top: 1rem;
+        color: #58a6ff;
+        text-decoration: none;
+        padding: 0.4rem 0.8rem;
+        border: 1px solid #58a6ff;
+        border-radius: 6px;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+
+      a.docs:hover {
+        background: #58a6ff;
+        color: #0d1117;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Instagram clone</h1>
+    <div class="logo">
+      <span class="bracket">{</span>
+      <span class="api">api</span>
+      <span class="bracket">}</span>
+    </div>
+
+    <div class="snippet">
+      <div class="line">
+        <div class="method GET">GET</div>
+        <div class="endpoint">/api/posts</div>
+      </div>
+      <div class="line">
+        <div class="method GET">GET</div>
+        <div class="endpoint">/api/users/:id</div>
+      </div>
+      <div class="line">
+        <div class="method POST">POST</div>
+        <div class="endpoint">/api/posts</div>
+      </div>
+      <div class="line">
+        <div class="method DELETE">DELETE</div>
+        <div class="endpoint">/api/posts/:id</div>
+      </div>
+    </div>
+
+    <a class="docs" href="/api" target="_blank" rel="noopener noreferrer">
+      API Documentation →
+    </a>
+  </body>
+</html>

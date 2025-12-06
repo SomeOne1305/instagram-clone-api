@@ -7,6 +7,7 @@ import path from 'path';
 @Controller('')
 export class AppController {
   constructor() {}
+
   @Get('api')
   async getDocs(@Res() res: Response) {
     return res.sendFile(

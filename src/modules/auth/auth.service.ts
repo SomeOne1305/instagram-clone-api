@@ -114,9 +114,11 @@ export class AuthService {
     }
 
     const otp = await this.otpService.generateOtp(email);
+    console.log(email, otp);
+
     await this.mailer
       .sendMail({
-        from: `anonymousmrx55@mail.ru`,
+        from: `boboxonusanov@gmail.com`,
         to: email,
         subject: `Your reset-password code is [${otp}]`,
         html: renderTemplate(user.username, otp),

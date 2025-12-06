@@ -76,6 +76,7 @@ export class FileDto {
 export class VerificationDto {
   @ApiProperty()
   @IsEmail()
+  @IsNotEmpty()
   email: string;
 }
 export class VerifyResDto {

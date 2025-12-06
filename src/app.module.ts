@@ -12,6 +12,8 @@ import { LikesModule } from './modules/likes/likes.module';
 import { PostsModule } from './modules/posts/posts.module';
 import { UsersModule } from './modules/users/users.module';
 
+console.log(databaseConfig());
+
 @Module({
   imports: [
     PostsModule,
@@ -20,7 +22,9 @@ import { UsersModule } from './modules/users/users.module';
     TypeOrmModule.forRootAsync({
       useFactory: () => databaseConfig(),
     }),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     AuthModule,
     FollowersModule,
     LikesModule,
