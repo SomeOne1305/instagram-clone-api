@@ -35,7 +35,7 @@ async function bootstrap() {
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    preflightContinue: false,
+    preflightContinue: true,
   });
 
   // Swagger setup
