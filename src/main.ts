@@ -26,14 +26,16 @@ async function bootstrap() {
 
   app.enableCors({
     origin: (origin, callback) => {
-      if (allowedOrigins.includes(origin) || !origin) {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'));
+        console.error(`Blocked CORS request from origin: ${origin}`);
+        callback(new Error('CORS policy violation'));
       }
     },
     credentials: true,
-    methods: ['POST', 'PUT', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    preflightContinue: false,
   });
 
   // Swagger setup
