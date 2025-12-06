@@ -33,7 +33,7 @@ async function bootstrap() {
       }
     },
     credentials: true,
-    methods: ['POST', 'PUT', 'GET', 'PATCH', 'DELETE'],
+    methods: ['POST', 'PUT', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
   });
 
   // Swagger setup
