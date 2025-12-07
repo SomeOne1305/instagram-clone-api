@@ -160,6 +160,28 @@ export class AuthService {
     return new HttpException('Password changed successfully', 202);
   }
 
+  async checkAuthStatus(req: Request) {
+    const cookie = req.cookies['refresh_token'];
+    if (!cookie) {
+      return { authenticated: false };
+    }
+    try {
+      const payload: IPayload = this.jwt.verify(cookie);
+      if (!payload) {
+        return { authenticated: false };
+      }
+      const user = await this.userRepository.findOne({
+        where: { id: payload.id },
+      });
+      if (!user) {
+        return { authenticated: false };
+      }
+      return { authenticated: true };
+    } catch (error) {
+      return { authenticated: false };
+    }
+  }
+
   async logout(res: Response) {
     res.cookie('access_token', '', { maxAge: 0 });
     res.cookie('refresh_token', '', { maxAge: 0 });

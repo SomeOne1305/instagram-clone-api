@@ -61,10 +61,12 @@ export class AuthController {
     res.cookie('access_token', access_token, {
       secure: true,
       maxAge: 2 * 60 * 60 * 1000,
+      sameSite: 'none',
     });
     res.cookie('refresh_token', refresh_token, {
       secure: true,
       maxAge: 3 * 24 * 60 * 60 * 1000,
+      sameSite: 'none',
     });
     res.json({
       message: 'Logged in successfully.',
@@ -107,6 +109,12 @@ export class AuthController {
   })
   async resetPassword(@Body() dto: ResetPasswordDto) {
     return this.authService.resetPassword(dto);
+  }
+
+  @Post('check')
+  @HttpCode(200)
+  checkAuthStatus(@Req() req: Request) {
+    return this.authService.checkAuthStatus(req);
   }
 
   @Post('logout')

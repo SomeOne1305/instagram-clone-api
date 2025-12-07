@@ -22,6 +22,7 @@ async function bootstrap() {
   const allowedOrigins = [
     'https://insta-clone-application.vercel.app',
     'http://localhost:5173',
+    (process.env.VERCEL_URL as string) || 'http://localhost:3000',
   ];
 
   app.enableCors({
